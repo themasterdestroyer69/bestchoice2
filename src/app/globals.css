@@ -1,0 +1,596 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-mono: "PT Serif", Serif sans-serif, ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  --primary-glow: conic-gradient(
+    from 180deg at 50% 50%,
+    #16abff33 0deg,
+    #0885ff33 55deg,
+    #54d6ff33 120deg,
+    #0071ff33 160deg,
+    transparent 360deg
+  );
+  --secondary-glow: radial-gradient(
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+
+  --tile-start-rgb: 239, 245, 249;
+  --tile-end-rgb: 228, 232, 233;
+  --tile-border: conic-gradient(
+    #00000080,
+    #00000040,
+    #00000030,
+    #00000020,
+    #00000010,
+    #00000010,
+    #00000080
+  );
+
+  --callout-rgb: 238, 240, 241;
+  --callout-border-rgb: 172, 175, 176;
+  --card-rgb: 180, 185, 188;
+  --card-border-rgb: 131, 134, 135;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+
+    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
+    --secondary-glow: linear-gradient(
+      to bottom right,
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0),
+      rgba(1, 65, 255, 0.3)
+    );
+
+    --tile-start-rgb: 2, 13, 46;
+    --tile-end-rgb: 2, 5, 19;
+    --tile-border: conic-gradient(
+      #ffffff80,
+      #ffffff40,
+      #ffffff30,
+      #ffffff20,
+      #ffffff10,
+      #ffffff10,
+      #ffffff80
+    );
+
+    --callout-rgb: 20, 20, 20;
+    --callout-border-rgb: 108, 108, 108;
+    --card-rgb: 100, 100, 100;
+    --card-border-rgb: 200, 200, 200;
+  }
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+
+::selection {
+  background: rgb(7, 0, 21);
+  color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+::-webkit-scrollbar-thumb{
+  background: rgb(165, 165, 165);
+  visibility: hidden;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: content-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+}
+
+.mainContent {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
+
+  & .promotion, .product_view {
+    width: auto;
+    height: 100vh;
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+        135deg,
+        rgb(var(--background-end-rgb)),
+        rgb(var(--background-start-rgb))
+    );
+    border: 1px solid rgb(var(--tile-border));
+  }
+
+  & .nav_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    z-index: 1;
+
+    & .nav {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 10vh;
+      backdrop-filter: blur(15px);
+      background-color: rgb(255, 255, 255, 0.7);
+      width: 100%;
+      height: 10vh;
+      border-radius: 0.5rem;
+      border: solid 0.1rch rgb(255, 255, 255, 0.7);
+      transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+
+      & .logo {
+        grid-template-rows: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rcap;
+      }
+    }
+    & .nav_menu{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+      padding-top: 3rem;
+      padding-bottom: 6rem;
+
+      & div {
+        background-color: transparent;
+        height: 0;
+        width: 0;
+        transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+        display: flex;
+        justify-content: end;
+
+          & .menu {
+            background-color: transparent;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            display: grid;
+            padding-right: 3rem;
+
+            & .img_cont{
+              background: url('https://static.zara.net/assets/public/8615/f96b/a05d4d689910/e4761bfc9af0/image-landscape-fill-f80d02ba-a755-4406-b1ca-752619a736ec-default_0.jpg?ts=1717397049489&w=2560');
+              background-size: cover;
+              background-position: 10%;
+              width: 100%;
+              height: 100%;
+            }
+
+            & text {
+              padding-left: 3rem;
+              border: solid 0.1rch rgb(255, 255, 255, 0);
+              display: flex;
+              align-items: center;
+        transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+
+            }
+
+            & text:hover {
+              background-color: rgb(255, 255, 255, 0.1);
+              color: rgb(7, 0, 21);
+              border: solid 0.1rch rgb(255, 255, 255, 0.7);
+            } 
+          }
+      }
+
+      & .b_r{
+        border:  solid 0rem rgb(7, 0, 21);
+        justify-content: start;
+        
+        & .menu {
+          grid-template-columns: 100%;
+          grid-template-rows: 100% 100% 100%;
+
+          & .img_cont_1{
+              background: url('https://static.zara.net/photos///contents/mkt/spots/ss24-studio-collection-maintenance/subhome-xmedia-worldwide//w/1639/IMAGE-landscape-0224cf8b-a2e1-4ab7-a5a3-6c8d4923289b-default_0.jpg?ts=1710158285323');
+              min-width: 100%;
+              min-height: 100%;
+              position: relative;
+              grid-row: 1;
+              transform: translateX(20%);
+              border: solid 0.1rch rgb(255, 255, 255, 0.7);
+        transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+
+
+          }
+          & .img_cont_2{
+            background: url('https://static.zara.net/assets/public/1571/d276/b0aa4535a354/7a4a19066372/03386547064-p/03386547064-p.jpg?ts=1717081827225&w=1639');
+            background-size: cover;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translateY(-190%) translateX(30%);
+            border: solid 0.1rch rgb(255, 255, 255, 0.7);
+        transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+
+
+
+          }
+          
+          & .img_cont{
+            min-width: 100%;
+            min-height: 100%;
+            transform: translateY(-90%) translateX(10%);
+            border: solid 0.1rch rgb(255, 255, 255, 0.7);
+        transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+
+
+          }
+
+          & .img_cont:hover{
+            filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0, 0.5));
+          }
+          & .img_cont_1:hover{
+            filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0, 0.5));
+          }
+          & .img_cont_2:hover{
+            filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0, 0.5));
+          }
+        }
+      }
+    }
+
+    .nav:hover{
+      backdrop-filter: blur(115px);
+      height: 70vh;
+
+      & .nav_menu{
+        & div {
+          height: 100%;
+          width: 100%;
+
+          & .menu {
+            width: 30vw;
+            height: 100%;
+            font-size: 3rem;
+          }
+        }
+
+        & .b_r{
+          border-left:  solid 0.1rch rgb(7, 0, 21);
+        }
+      }
+    }
+  }
+
+  & .promotion {
+    /*background-image: url('https://static.zara.net/assets/public/8615/f96b/a05d4d689910/e4761bfc9af0/image-landscape-fill-f80d02ba-a755-4406-b1ca-752619a736ec-default_0.jpg?ts=1717397049489&w=2560');*/
+    background: 
+            linear-gradient(135deg, transparent, transparent, rgba(255, 149, 0, 0.8)),
+            url('https://static.zara.net/assets/public/8615/f96b/a05d4d689910/e4761bfc9af0/image-landscape-fill-f80d02ba-a755-4406-b1ca-752619a736ec-default_0.jpg?ts=1717397049489&w=2560');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 50vh;
+
+    & .tittle {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding-right: 2rem;
+      grid-row: 2;
+      font-size: 6rem;
+      font-weight: normal;
+      color: rgb(255, 255, 255);
+      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    }
+
+    & .card_container {
+      grid-row: 3;
+      background-color: transparent;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 0 1rem 1rem 1rem;
+      max-width: 100vw;
+      overflow: scroll;
+
+      & .card {
+        backdrop-filter: blur(115px);
+        background-color: rgb(255, 255, 255, 0.5);
+        min-width: 470px;
+        border: solid 0.5rch rgb(255, 255, 255, 0.7);
+        border-radius: 0.5rem;
+      }
+
+      & :nth-child(2){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3655277-483-725?v=638504063698500000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 70%;        
+      }
+
+      & :nth-child(3){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3641357-483-725?v=638500564162570000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 100%; 
+      }
+
+      & :nth-child(4){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3490763-483-725?v=638436689551530000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 100%; 
+      }
+
+      & :nth-child(5){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/2820790-483-725?v=638237107069430000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 100%; 
+      }
+
+      & :nth-child(6){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3714058-483-725?v=638526521798200000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 86%; 
+      }
+
+      & :nth-child(7){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3721728-483-725?v=638528243475730000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 86%; 
+      }
+
+      & .card_txt{
+        text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+        min-width: 570px;
+        background-color: transparent;
+        backdrop-filter: blur(0);
+        border: none;
+        font-size: 1.5rem;
+        font-weight: normal;
+        color: rgb(255, 255, 255);
+      }
+    }
+  }
+
+  & .product_view {
+    /*background-image: url('https://static.zara.net/assets/public/5588/4a79/7bbb401982b7/b024263aeb06/image-landscape-fill-93ddbdc2-e6fc-4038-bfac-b6d293fe2512-default_0.jpg?ts=1717397733628&w=2560');*/
+    /*background: 
+            url('https://static.zara.net/assets/public/5588/4a79/7bbb401982b7/b024263aeb06/image-landscape-fill-93ddbdc2-e6fc-4038-bfac-b6d293fe2512-default_0.jpg?ts=1717397733628&w=2560'),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);*/
+    background: 
+            linear-gradient(135deg, transparent, transparent, rgb(76, 0, 255, 0.8)),
+            url('https://static.zara.net/assets/public/5588/4a79/7bbb401982b7/b024263aeb06/image-landscape-fill-93ddbdc2-e6fc-4038-bfac-b6d293fe2512-default_0.jpg?ts=1717397733628&w=2560');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 50vh;
+
+    & .tittle {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding-right: 2rem;
+      grid-row: 2;
+      font-size: 6rem;
+      font-weight: normal;
+      color: rgb(0, 0, 0);
+      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    }
+
+    & .card_container {
+      grid-row: 3;
+      background-color: transparent;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 0 1rem 1rem 1rem;
+      max-width: 100vw;
+      overflow: scroll;
+
+      & :nth-child(2){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3663491-294-450?v=638506650557970000&width=294&height=450&aspect=true');
+        background-position: 50%;
+        background-size: 100%;        
+      }
+
+      & :nth-child(3){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3601969-483-725?v=638472085689800000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 100%; 
+      }
+
+      & :nth-child(4){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3635946-483-725?v=638485932079230000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 100%; 
+      }
+
+      & :nth-child(5){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3329261-294-450?v=638381390839870000&width=294&height=450&aspect=true');
+        background-position: 50%;
+        background-size: 100%; 
+      }
+
+      & :nth-child(6){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3717976-483-725?v=638527407542470000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 86%; 
+      }
+
+      & :nth-child(7){
+        background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3721728-483-725?v=638528243475730000&width=483&height=725&aspect=true');
+        background-position: 50%;
+        background-size: 86%; 
+      }
+
+      & .card {
+        backdrop-filter: blur(115px);
+        min-width: 470px;
+        border: solid 0.5rch rgb(255, 255, 255, 0.7);
+        border-radius: 0.5rem;
+      }
+
+      & .card_txt{
+        min-width: 570px;
+        background-color: transparent;
+        backdrop-filter: blur(0);
+        border: none;
+        font-size: 1.5rem;
+        font-weight: normal;
+        color: rgb(0, 0, 0);
+      }
+    }
+  }
+
+  .product_view_1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.3fr 0.2fr 1fr;
+    height: 70vh;
+    background: linear-gradient(
+        135deg,
+        rgb(255, 255, 255),
+        rgb(114, 231, 255)
+    );
+
+    & .tittle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 2rem;
+      font-size: 4rem;
+      font-weight: normal;
+      color: rgb(0, 0, 0);
+      text-shadow: 2px 2px 2px rgb(0, 0, 0, 0.5);
+    }
+
+    & p{
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      grid-row: 2;
+      font-size: 2rem;
+      font-weight: normal;
+      color: rgb(0, 0, 0);
+    }
+
+    & .card_container {
+      grid-row: 3;
+      background-color: transparent;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      padding: 0 1rem 1rem 1rem;
+      max-width: 100vw;
+      overflow: scroll;
+
+        & .card {
+          backdrop-filter: blur(115px);
+          background-color: rgba(225, 242, 255, 0.5);
+          min-width: 470px;
+          border: solid 0.5rch rgb(255, 255, 255, 0.7);
+        }
+
+        & :nth-child(1){
+          background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3665622-483-725?v=638507511346270000&width=483&height=725&aspect=true');
+          background-position: 50%;
+          background-size: 90%;        
+        }
+  
+        & :nth-child(2){
+          background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3390438-483-725?v=638420425395870000&width=483&height=725&aspect=true');
+          background-position: 50%;
+          background-size: 90%; 
+        }
+  
+        & :nth-child(3){
+          background: url('https://hmcolombia.vtexassets.com/arquivos/ids/3454479-483-725?v=638428883092070000&width=483&height=725&aspect=true');
+          background-position: 50%;
+          background-size: 100%; 
+        }
+  
+        & :nth-child(4){
+          background: url('https://hmcolombia.vtexassets.com/arquivos/ids/2820790-483-725?v=638237107069430000&width=483&height=725&aspect=true');
+          background-position: 50%;
+          background-size: 100%; 
+        }
+  
+        & :nth-child(5){
+          background: url('https://static.zara.net/assets/public/94df/aac5/e21e487a8899/5c4702422855/06688405406-e1/06688405406-e1.jpg?ts=1706691005432&w=563');
+          background-position: 50%;
+          background-size: 86%; 
+        }
+  
+        & :nth-child(6){
+          background: url('https://static.zara.net/assets/public/68a8/9a06/e7f24bf3888c/1c00a6a2e688/06688405800-e1/06688405800-e1.jpg?ts=1706690994924&w=563');
+          background-position: 50%;
+          background-size: 86%; 
+        }
+
+        & .card_txt{
+          min-width: 570px;
+          background-color: transparent;
+          backdrop-filter: blur(0);
+          border: none;
+          font-size: 1.5rem;
+          font-weight: normal;
+          color: rgb(0, 0, 0);
+        }
+      }
+    }
+} 
+
+.card{
+  display: grid;
+  grid-column: 1fr;
+  grid-template-rows: 3fr 1fr;
+  transition:  500ms cubic-bezier(0.075, 0.82, 0.165, 1) ;
+}
+
+.card:hover {
+  filter: drop-shadow(0 0 0.5rem rgb(0, 0, 0, 0.5));
+  cursor: pointer;
+}
+
+.promotion video{
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.footer{
+  background: linear-gradient(
+        135deg,
+        rgb(0,0,0),
+        rgb(7, 0, 21)
+    );
+  height: 50vh;
+  width: 100%;
+}
